@@ -1,30 +1,43 @@
-
 def input_students
   puts "Please enter: name, country of birth, height, hobby and cohort separated by a space."
   puts "To finish, just hit return twice"
+  
   # Create an empty array
   students = []
   
-  # Get details from user
-  student_information = gets.chomp.split(" ")
-
+  # To be overriden
+  student_information = " "
+  
   # While name is not empty repeat this code
   while !student_information.empty? do
-    # Add student_information hash to students array
-    students << {
-      name: student_information[0], 
-      country: student_information[1],
-      height: student_information[2],
-      hobby: student_information[3],
-      cohort: :november
-    } 
-    puts "Now we have #{students.count} students."
-    
-     # Get more details from the user
+    # Get more details from the user
     student_information = gets.chomp.split(" ")
+    p student_information
+    # Parallel assignment
+    name, country, height, hobby, cohort = student_information
+    
+    
+    # Check for empty value
+    break if name == nil
+    
+    # Assign unknown if any of the values are empty
+    country = "Unknown" if country == nil
+    height = "Unknown" if height == nil
+    hobby = "Unknown" if hobby == nil
+    cohort = "Unknown" if cohort == nil
+
+   # Add student_information hash to students array
+    students << {
+      name: name,
+      country: country,
+      height: height,
+      hobby: hobby,
+      cohort: cohort
+    }
+    puts "Now we have #{students.count} students."
   end
   
-  # return array of students
+  # Return array of students
   students
 end
 
@@ -38,6 +51,7 @@ def print(students)
   students.each do |student|
       puts "#{student[:name]} #{student[:country]} #{student[:height]} #{student[:hobby]} #{student[:cohort]}"
   end
+  p students
 end
 
 def print_footer(students)
