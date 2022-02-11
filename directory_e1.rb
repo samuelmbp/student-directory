@@ -27,6 +27,7 @@ def print_header
 end
 
 def print(students)
+    # Print the index of each name starting from 1.
     students.each.with_index(1) do |student, idx|
         puts "#{idx}. #{student[:name]} (#{student[:cohort]} cohort)"
     end

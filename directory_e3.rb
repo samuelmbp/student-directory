@@ -28,10 +28,10 @@ def print_header
 end
 
 def print(students)
-    # Print the index of each name starting from 1.
+  # Print the index of each name starting from 1.
     students.each.with_index(1) do |student, idx|
-        # Print name if starts with a given char or chars
-      if student[:name].start_with?("S")
+      # Print a students who's name is less than 12 chars.
+      if student[:name].length < 12
         puts "#{idx}. #{student[:name]} (#{student[:cohort]} cohort)"
       end
     end
