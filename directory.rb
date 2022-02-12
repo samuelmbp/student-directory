@@ -1,28 +1,42 @@
 def input_students
-    # Create an empty array
-    students = []
+  # Create an empty array
+  students = []
+
+  puts "Please enter the name and the cohort of the student on the same line with a space between"
+  
+  student = " "
+  
+  # While name is not empty repeat this code
+  while !student.empty? do
+    student = gets.chomp.split(" ")
     
-    puts "To finish, just hit return twice"
-    puts "Enter the name of the student"
-    # Get first name
-    name = gets.chomp
+    # Parallel assignment
+    name, cohort = student
     
-    puts "Enter the cohort"
-    # Get the cohort the user belongs to
-    cohort = gets.chomp
+    name = "Sam".to_sym if name == nil
+    cohort = "February".to_sym if cohort == nil
     
-    # While name is not empty repeat this code
-    while !name.empty? do
-       students << {name: name, cohort: cohort}
-       puts "Now we have #{students.count} students."
-       
-       # Get another name from the user
-       name = gets.chomp
-       # Ask for another cohort
-       cohort = gets.chomp
-    end
+    # Default values for name and cohort
+    # name = "Sam".to_sym if name.empty?
+
     
-    # return array of students
+    # Add student_information hash to students array
+    students << {
+     name: name, 
+     cohort: cohort
+    }
+     
+    puts "Now we have #{students.count} students."
+   
+    puts "Please enter another student. To finish - just hit return twice"
+     
+  #   # Get another name from the user
+  #   name = gets.chomp
+  #   # Ask for another cohort
+  #   cohort = gets.chomp
+  end
+    
+    # Return array of students
     students
 end
 
@@ -35,6 +49,7 @@ def print(students)
     students.each do |student|
         puts "#{student[:name]} (#{student[:cohort]} cohort)"
     end
+    p students
 end
 
 def print_footer(students)
