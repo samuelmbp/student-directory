@@ -1,20 +1,25 @@
 def input_students
-    puts "Please enter the name of the students"
-    puts "To finish, just hit return twice"
-    
-    #create an empty array
+    # Create an empty array
     students = []
     
-    # get first name
+    puts "To finish, just hit return twice"
+    puts "Enter the name of the student"
+    # Get first name
     name = gets.chomp
     
-    # while name is not empty repeat this code
+    puts "Enter the cohort"
+    # Get the cohort the user belongs to
+    cohort = gets.chomp
+    
+    # While name is not empty repeat this code
     while !name.empty? do
-       students << {name: name, cohort: :november}
+       students << {name: name, cohort: cohort}
        puts "Now we have #{students.count} students."
        
-       # get another name from the user
+       # Get another name from the user
        name = gets.chomp
+       # Ask for another cohort
+       cohort = gets.chomp
     end
     
     # return array of students
@@ -41,3 +46,4 @@ students = input_students
 print_header
 print(students)
 print_footer(students)
+
