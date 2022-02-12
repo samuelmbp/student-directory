@@ -3,24 +3,29 @@ def input_students
   students = []
 
   puts "Please enter the name and the cohort of the student on the same line with a space between"
+  puts "Press 'quit' if you made a mistake and re-enter student information"
   
   student = " "
   
   # While name is not empty repeat this code
   while !student.empty? do
+    # Student information
     student = gets.chomp.split(" ")
     
     # Parallel assignment
     name, cohort = student
     
+    # Check for empty value
+    break if name == nil
+    
+    # Quit if user makes a typo
+    break if name == "quit" || cohort == "quit"
+    
+    # Default value if name or cohort is empty  - converted to a symbol
     name = "Sam".to_sym if name == nil
     cohort = "February".to_sym if cohort == nil
     
-    # Default values for name and cohort
-    # name = "Sam".to_sym if name.empty?
-
-    
-    # Add student_information hash to students array
+    # Add student to students array
     students << {
      name: name, 
      cohort: cohort
@@ -29,11 +34,6 @@ def input_students
     puts "Now we have #{students.count} students."
    
     puts "Please enter another student. To finish - just hit return twice"
-     
-  #   # Get another name from the user
-  #   name = gets.chomp
-  #   # Ask for another cohort
-  #   cohort = gets.chomp
   end
     
     # Return array of students
@@ -46,10 +46,11 @@ def print_header
 end
 
 def print(students)
-    students.each do |student|
-        puts "#{student[:name]} (#{student[:cohort]} cohort)"
+    # Add an index starting from 1 to each student
+    students.each.with_index(1) do |student, idx|
+        puts "#{idx}. #{student[:name]} (#{student[:cohort]} cohort)"
     end
-    p students
+    # p students
 end
 
 def print_footer(students)
