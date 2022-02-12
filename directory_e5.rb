@@ -1,6 +1,6 @@
 def input_students
-  puts "Please enter: name, country of birth, height, hobby and cohort separated by a space."
-  puts "To finish, just hit return twice"
+  puts "Please enter: name, country of birth, height, hobby and cohort separated by a space.".center(130)
+  puts "To finish, just hit return twice".center(120)
   
   # Create an empty array
   students = []
@@ -12,7 +12,7 @@ def input_students
   while !student_information.empty? do
     # Get more details from the user
     student_information = gets.chomp.split(" ")
-    p student_information
+
     # Parallel assignment
     name, country, height, hobby, cohort = student_information
     
@@ -34,7 +34,7 @@ def input_students
       hobby: hobby,
       cohort: cohort
     }
-    puts "Now we have #{students.count} students."
+    puts "Now we have #{students.count} students.".center(120)
   end
   
   # Return array of students
@@ -42,20 +42,19 @@ def input_students
 end
 
 def print_header
-  puts "The students of Villains Academy"
-  puts "-------------"
-  puts "NAME COUNTRY HEIGHT HOBBY COHORT"
+  puts "The students of Villains Academy".center(120)
+  puts "-------------".center(120)
+  puts "NAME COUNTRY HEIGHT HOBBY COHORT".center(120)
 end
 
 def print(students)
   students.each do |student|
-      puts "#{student[:name]} #{student[:country]} #{student[:height]} #{student[:hobby]} #{student[:cohort]}"
+      puts "#{student[:name]} #{student[:country]} #{student[:height]} #{student[:hobby]} #{student[:cohort]}".center(120)
   end
-  p students
 end
 
 def print_footer(students)
-  puts "Overall, we have #{students.count} great students"    
+  puts "Overall, we have #{students.count} great students".center(120)  
 end
 
 students = input_students
