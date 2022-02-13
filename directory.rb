@@ -25,14 +25,10 @@ def input_students
     name = "Sam".to_sym if name == nil
     cohort = "February".to_sym if cohort == nil
     
-    # Add student to students array
-    students << {
-     name: name, 
-     cohort: cohort
-    }
-     
-    puts "Now we have #{students.count} students."
-   
+    # Add student to students array | display 'student' or 'students' baseed on the size
+    students << { name: name, cohort: cohort }
+    puts "Now we have #{students.count} #{students.count == 1 ? "student" : "students."}"
+  
     puts "Please enter another student. To finish - just hit return twice"
   end
     
@@ -54,7 +50,7 @@ def print(students)
 end
 
 def print_footer(students)
-    puts "Overall, we have #{students.count} great students"    
+    puts "Overall, we have #{students.count} great #{students.count == 1 ? "student" : "students"}"    
 end
 
 students = input_students
