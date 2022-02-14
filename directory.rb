@@ -26,7 +26,7 @@ def input_students
     cohort = "February".to_sym if cohort == nil
     
     # Add student hash to students array 
-    students << { name: name, cohort: cohort.to_sym }
+    students << { name: name.capitalize, cohort: cohort.to_sym }
     
     # Display 'student' or 'students' baseed on the size
     puts "Now we have #{students.count} #{students.count == 1 ? "student" : "students."}"
@@ -34,8 +34,8 @@ def input_students
     puts "Please enter another student. To finish - just hit return twice"
   end
     
-    # Return array of students
-    students
+  # Return array of students
+  students
 end
 
 # Print the students grouped by a specific cohort.
@@ -52,10 +52,40 @@ def print_header
     puts "-------------------------------"
 end
 
+def interactive_menu
+  students = []
+  loop do
+    # 1. print the menu and ask the user what to do
+    puts "1. Input the students"
+    puts "2. Show the students"
+    puts "9. Exit"
+    # 2. read the input and save it into a variable
+    selection = gets.chomp
+    # 3. do what the user has asked
+    case selection
+    when "1"
+      students = input_students
+    when "2"
+      print_header
+      print(students)
+      print_footer(students)
+    when "9"
+      exit # cause the program to terminate
+    else
+      puts "I don't know what you meant, try again."
+    end
+  end
+end
+
 def print(students)
-    # Add an index starting from 1 to each student
-    students.each.with_index(1) do |student, idx|
-        puts "#{idx}. #{student[:name]} (#{student[:cohort]} cohort)"
+  # Display list if it has at least one student
+    if students.count >= 1
+      # Add an index starting from 1 to each student
+      students.each.with_index(1) do |student, idx|
+          puts "#{idx}. #{student[:name]} (#{student[:cohort]} cohort)"
+      end
+    else
+      puts "The list is empty. Please enter at least one student."
     end
 end
 
@@ -63,10 +93,12 @@ def print_footer(students)
     puts "Overall, we have #{students.count} great #{students.count == 1 ? "student" : "students"}"    
 end
 
-students = input_students
+interactive_menu
+
+# students = input_students
 # Nothing happens until we call the below methods.
-print_header
+# print_header
 # grouped_by_cohort(students)
-print(students)
-print_footer(students)
+# print(students)
+# print_footer(students)
 
