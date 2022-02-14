@@ -25,8 +25,10 @@ def input_students
     name = "Sam".to_sym if name == nil
     cohort = "February".to_sym if cohort == nil
     
-    # Add student to students array | display 'student' or 'students' baseed on the size
+    # Add student hash to students array 
     students << { name: name, cohort: cohort.to_sym }
+    
+    # Display 'student' or 'students' baseed on the size
     puts "Now we have #{students.count} #{students.count == 1 ? "student" : "students."}"
   
     puts "Please enter another student. To finish - just hit return twice"
