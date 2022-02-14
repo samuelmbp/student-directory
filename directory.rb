@@ -21,32 +21,34 @@ def process(selection)
       input_students
     when "2"
       show_students
-    when "3"
-      save_students
-    when "4"
-      load_students
-    when "9"
-      exit # 'exit' will cause the program to terminate
-    else
-      puts "I don't know what you meant, try again."
+    when "3" then save_students; puts "Students successfully saved."
+    when "4" then load_students; puts "Students successfully loaded"
+    when "9" then puts "See you later!"; exit 
+    else puts "I don't know what you meant, try again."
   end
-end 
+end
 
 def input_students
   puts "Please enter the name of the students"
   puts "To finish, just hit return twice"
-  name = STDIN.gets.chomp # Gets the first name
+  name = STDIN.gets.chomp
   
   # While the name is not empty, repeat this code
   while !name.empty? do
-    # Add student hash to an array
-    @students << { name: name.capitalize, cohort: :february }
+    cohort = "February"
+    add_student_to_list(name, cohort)
     # Display 'student' or 'students' baseed on the size
     puts "Now we have #{@students.count} #{@students.count == 1 ? "student" : "students."}"
     
-    name = STDIN.gets.chomp # Gets another name from the user
+    name = STDIN.gets.chomp
   end
 end
+
+def add_student_to_list(name, cohort)
+  # Add student hash to an array
+  @students << { name: name, cohort: cohort.to_sym}
+end
+
 
 def show_students
   print_header
@@ -89,13 +91,14 @@ def save_students
   file.close
 end
 
+
 def load_students(filename = "students.csv") # Default value
   # Open file for reading
   file = File.open(filename, "r")
   file.readlines.each do |line|
     # Array with two element (parallel assignment)
     name, cohort = line.chomp.split(",")
-    @students << { name: name, cohort: cohort.to_sym }
+    add_student_to_list(name, cohort)
   end
   file.close
 end
@@ -113,5 +116,5 @@ def try_load_students
 end
 
 
-
+try_load_students
 interactive_menu
