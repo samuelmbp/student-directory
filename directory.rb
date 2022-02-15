@@ -28,25 +28,39 @@ def process(selection)
   end
 end
 
-def input_students
+def student_name
   puts "Please enter the name of the students"
   puts "To finish, just hit return twice"
   name = STDIN.gets.chomp
-  
+end
+
+def student_cohort(name)
+  if !name.empty?
+    puts "Please enter cohort for: #{name}"
+    cohort = STDIN.gets.chomp
+    # Default value if user does not enter a chort
+    cohort = "February".to_sym if cohort.empty?
+  end
+end
+
+def input_students
+  # Get student name
+  name = student_name
+  cohort = student_cohort(name)
   # While the name is not empty, repeat this code
   while !name.empty? do
-    cohort = "February"
     add_student_to_list(name, cohort)
-    # Display 'student' or 'students' baseed on the size
     puts "Now we have #{@students.count} #{@students.count == 1 ? "student" : "students."}"
-    
+    puts "Please enter another student name: "
     name = STDIN.gets.chomp
+    # Get student cohort
+    cohort = student_cohort(name)
   end
 end
 
 def add_student_to_list(name, cohort)
   # Add student hash to an array
-  @students << { name: name, cohort: cohort.to_sym}
+  @students << { name: name, cohort: cohort }
 end
 
 
@@ -81,6 +95,13 @@ def save_students
   # Open file for writing
   file = File.open("students.csv", "w")
   # Iterate over the array of students
+  # @students.each { |student|  
+  #   # Create a new array with student name and cohort
+  #   student_data = [student[:name], student[:cohort]]
+  #   csv_line = student_data.join(",")
+  #   file.puts csv_line # Write to the file
+  # }
+  
   @students.each do |student| 
     # Create a new array with student name and cohort
     student_data = [student[:name], student[:cohort]]
