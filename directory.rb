@@ -114,21 +114,21 @@ def load_filename
   end
 end
 
-def load_students(load_filename = "students.csv")
+def load_students(load_filename)
 # Open file for reading
-  file = File.open("#{load_filename}", "r")
-  file.readlines.each do |line|
-    name, cohort = line.chomp.split(",")
-    add_student_to_list(name, cohort)
+  File.open(load_filename, "r") do |file|
+    file.readlines.each { |line|
+      name, cohort = line.chomp.split(",")
+      add_student_to_list(name, cohort)
+    }
   end
-  file.close
+  puts "The list of students has been loaded from #{load_filename}"
 end
 
 def try_load_students
   filename = ARGV.first # First argument from the command line
-  if filename.nil?
-    filename = "students.csv"
-  end
+  return if filename.nil?
+  
   if File.exists?(filename)
     load_students(filename)
     puts "Loaded #{@students.count} from #{filename}"
