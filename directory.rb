@@ -38,9 +38,6 @@ def student_cohort(name)
   if !name.empty?
     puts "Please enter cohort for: #{name}"
     cohort = STDIN.gets.chomp
-    return cohort
-    # Default value 
-    cohort = "February".to_sym if cohort.empty?
   end
 end
 
